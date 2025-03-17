@@ -1,8 +1,8 @@
-import axios from "../../api/axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./SearchPage.css";
 import { useDebounce } from "../../hooks/useDebouce";
+import axios from "../../api/axios";
+import "./SearchPage.css";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
