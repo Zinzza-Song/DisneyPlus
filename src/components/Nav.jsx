@@ -23,10 +23,7 @@ const Nav = () => {
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
-  };
-
-  const handleEnter = (e) => {
-    if (e.key === "Enter") navigate(`/search?q=${e.target.value}`);
+    navigate(`/search?q=${e.target.value}`);
   };
 
   return (
@@ -46,7 +43,6 @@ const Nav = () => {
           <Input
             value={searchValue}
             onChange={handleChange}
-            onKeyDown={handleEnter}
             className="nav__input"
             type="text"
             placeholder="검색해주세요"
