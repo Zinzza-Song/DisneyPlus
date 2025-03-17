@@ -1,11 +1,12 @@
 import axios from "../../api/axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchPage.css";
 import { useDebounce } from "../../hooks/useDebouce";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
