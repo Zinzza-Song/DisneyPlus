@@ -1,10 +1,10 @@
 import "react";
-import styled from "styled-components";
-import requests from "../../api/request";
 import Nav from "../../components/Nav";
 import Banner from "../../components/Banner";
 import Category from "../../components/Category";
 import Row from "../../components/Row";
+import requests from "../../api/request";
+import styled from "styled-components";
 
 const MainPage = () => {
   return (

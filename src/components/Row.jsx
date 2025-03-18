@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import MovieModal from "./MovieModal";
 import axios from "../api/axios";
+import styled from "styled-components";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -8,7 +9,6 @@ import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import "swiper/css/pagination";
 import "./Row.css";
-import styled from "styled-components";
 
 const Row = ({ title, id, fetchUrl }) => {
   const [movies, setMovies] = useState([]);
