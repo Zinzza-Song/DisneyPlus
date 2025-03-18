@@ -12,7 +12,11 @@ import styled from "styled-components";
 const Nav = () => {
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(
+    localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData"))
+      : {}
+  );
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const auth = getAuth();
@@ -48,7 +52,7 @@ const Nav = () => {
     signInWithPopup(auth, provider)
       .then((res) => {
         setUserData(res.user);
-        console.log(userData.photoURL);
+        localStorage.setItem("userData", JSON.stringify(res.user));
       })
       .catch((err) => {
         console.log(err);
