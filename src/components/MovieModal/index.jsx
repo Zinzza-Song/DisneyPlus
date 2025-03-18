@@ -3,6 +3,7 @@ import useOnClickOutside from "../../hooks/useOnClickOutside";
 import "./MovieModal.css";
 
 function MovieModal({
+  poster_path,
   backdrop_path,
   title,
   overview,
@@ -26,11 +27,19 @@ function MovieModal({
             X
           </span>
 
-          <img
-            className="modal__poster-img"
-            src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
-            alt="modal-img"
-          />
+          {backdrop_path != null ? (
+            <img
+              className="modal__poster-img"
+              src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+              alt="modal-img"
+            />
+          ) : (
+            <img
+              className="modal__poster-img"
+              src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+              alt="modal-img"
+            />
+          )}
 
           <div className="modal__content">
             <p className="modal__details">

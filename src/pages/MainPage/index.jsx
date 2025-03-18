@@ -20,9 +20,9 @@ const MainPage = () => {
         fetchUrl={requests.fetchActionMovies}
       />
       <Row
-        title="Comedy Movies"
-        id="CM"
-        fetchUrl={requests.fetchComedyMovies}
+        title="Romance Movies"
+        id="RM"
+        fetchUrl={requests.fetchRomanceMovies}
       />
     </Container>
   );

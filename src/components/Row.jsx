@@ -18,6 +18,8 @@ const Row = ({ title, id, fetchUrl }) => {
   const fetchMovieData = useCallback(async () => {
     const res = await axios.get(fetchUrl);
     setMovies(res.data.results);
+    console.log(title);
+    console.log(res.data.results);
   }, [fetchUrl]);
 
   useEffect(() => {
@@ -61,12 +63,21 @@ const Row = ({ title, id, fetchUrl }) => {
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>
               <Wrap>
-                <img
-                  key={movie.id}
-                  src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                  alt={movie.name}
-                  onClick={() => handleClick(movie)}
-                />
+                {movie.backdrop_path != null ? (
+                  <img
+                    key={movie.id}
+                    src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                    alt={movie.name}
+                    onClick={() => handleClick(movie)}
+                  />
+                ) : (
+                  <img
+                    key={movie.id}
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    alt={movie.name}
+                    onClick={() => handleClick(movie)}
+                  />
+                )}
               </Wrap>
             </SwiperSlide>
           ))}
