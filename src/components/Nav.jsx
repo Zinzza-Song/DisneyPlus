@@ -5,12 +5,14 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import styled from "styled-components";
 
 const Nav = () => {
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [userData, setUserData] = useState({});
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const auth = getAuth();
@@ -44,7 +46,21 @@ const Nav = () => {
 
   const handleAuth = () => {
     signInWithPopup(auth, provider)
-      .then((res) => {})
+      .then((res) => {
+        setUserData(res.user);
+        console.log(userData.photoURL);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUserData({});
+        navigate("/");
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -71,6 +87,19 @@ const Nav = () => {
             type="text"
             placeholder="검색해주세요"
           />
+
+          {pathname !== "/" && (
+            <SignOut>
+              <UserImg
+                referrerPolicy="no-referrer"
+                src={userData.photoURL}
+                alt={userData.displayName}
+              />
+              <DropDown>
+                <span onClick={handleSignOut}>Sign out</span>
+              </DropDown>
+            </SignOut>
+          )}
         </>
       )}
     </NavWraaper>
@@ -134,4 +163,42 @@ const Input = styled.input`
   color: white;
   padding: 5px;
   border: none;
+`;
+
+const UserImg = styled.img`
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+`;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radious: 4px;
+  box-shadow: rgb(0 0 0 / 50%) 0 0 18px 0;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 100%;
+  opacity: 0;
+`;
+
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
 `;
