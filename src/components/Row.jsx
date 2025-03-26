@@ -18,8 +18,6 @@ const Row = ({ title, id, fetchUrl }) => {
   const fetchMovieData = useCallback(async () => {
     const res = await axios.get(fetchUrl);
     setMovies(res.data.results);
-    console.log(title);
-    console.log(res.data.results);
   }, [fetchUrl]);
 
   useEffect(() => {
@@ -37,7 +35,7 @@ const Row = ({ title, id, fetchUrl }) => {
       <Swiper
         // Swiper 모듈 설치
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        loop={true} // loop 기능 사용 여부
+        loop={movies.length >= 1} // loop 기능 사용 여부
         navigation // arrow 버튼 사용 여부
         pagination={{ clickable: true }} // 페이지 버튼 보일지 여부
         breakpoints={{
