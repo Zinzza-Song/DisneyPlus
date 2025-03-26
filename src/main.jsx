@@ -5,12 +5,15 @@ import App from "./App.jsx";
 import app from "./firebase";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./store/index.js";
+import { persistor, store } from "./store/index.js";
+import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 );
